@@ -11,3 +11,6 @@ c:\users\mario\documents\visual studio 2013\Projects\Inventario2.0\Inventario2.0
 c:\users\mario\documents\visual studio 2013\Projects\Inventario2.0\Inventario2.0\obj\Debug\Inventario2.0.csproj.GenerateResource.Cache
 c:\users\mario\documents\visual studio 2013\Projects\Inventario2.0\Inventario2.0\obj\Debug\Inventario2.0.exe
 c:\users\mario\documents\visual studio 2013\Projects\Inventario2.0\Inventario2.0\obj\Debug\Inventario2.0.pdb
+C:\Users\mario\Documents\Visual Studio 2013\Projects\Inventario2.0\Inventario2.0\bin\Debug\EntityFramework.dll
+C:\Users\mario\Documents\Visual Studio 2013\Projects\Inventario2.0\Inventario2.0\bin\Debug\MySql.Data.Entity.EF5.dll
+C:\Users\mario\Documents\Visual Studio 2013\Projects\Inventario2.0\Inventario2.0\bin\Debug\EntityFramework.xml

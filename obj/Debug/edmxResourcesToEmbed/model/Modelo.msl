@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bd_inventarioModelStoreContainer" CdmEntityContainer="bd_inventarioEntities">
+    <EntitySetMapping Name="detalle_venta">
+      <EntityTypeMapping TypeName="bd_inventarioModel.detalle_venta">
+        <MappingFragment StoreEntitySet="detalle_venta">
+          <ScalarProperty Name="id_venta" ColumnName="id_venta" />
+          <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+          <ScalarProperty Name="cantidad_venta" ColumnName="cantidad_venta" />
+          <ScalarProperty Name="fecha_venta" ColumnName="fecha_venta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="deudores">
+      <EntityTypeMapping TypeName="bd_inventarioModel.deudore">
+        <MappingFragment StoreEntitySet="deudores">
+          <ScalarProperty Name="id_deudor" ColumnName="id_deudor" />
+          <ScalarProperty Name="nombre_deudor" ColumnName="nombre_deudor" />
+          <ScalarProperty Name="telefono_deudor" ColumnName="telefono_deudor" />
+          <ScalarProperty Name="deuda_deudor" ColumnName="deuda_deudor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="productoes">
+      <EntityTypeMapping TypeName="bd_inventarioModel.producto">
+        <MappingFragment StoreEntitySet="producto">
+          <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+          <ScalarProperty Name="nombre_producto" ColumnName="nombre_producto" />
+          <ScalarProperty Name="stock_producto" ColumnName="stock_producto" />
+          <ScalarProperty Name="valor_entrada_producto" ColumnName="valor_entrada_producto" />
+          <ScalarProperty Name="valor_salida_producto" ColumnName="valor_salida_producto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vendedors">
+      <EntityTypeMapping TypeName="bd_inventarioModel.vendedor">
+        <MappingFragment StoreEntitySet="vendedor">
+          <ScalarProperty Name="id_vendedor" ColumnName="id_vendedor" />
+          <ScalarProperty Name="nombre_vendedor" ColumnName="nombre_vendedor" />
+          <ScalarProperty Name="clave_vendedor" ColumnName="clave_vendedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ventas">
+      <EntityTypeMapping TypeName="bd_inventarioModel.venta">
+        <MappingFragment StoreEntitySet="venta">
+          <ScalarProperty Name="id_venta" ColumnName="id_venta" />
+          <ScalarProperty Name="fecha_venta" ColumnName="fecha_venta" />
+          <ScalarProperty Name="total_venta" ColumnName="total_venta" />
+          <ScalarProperty Name="id_deudor" ColumnName="id_deudor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

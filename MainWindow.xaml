@@ -5,10 +5,10 @@
     <Grid>
         <Label Content="usuario" HorizontalAlignment="Left" Margin="38,77,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.009,0.528" Width="83" Height="53" FontSize="20"/>
         <Label Content="Clave" HorizontalAlignment="Left" Margin="38,157,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.536" FontSize="20"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="205,88,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="201" RenderTransformOrigin="0.103,-0.178"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="205,171,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="201"/>
+        <TextBox x:Name="txt_usuarioingresar" HorizontalAlignment="Left" Height="23" Margin="205,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201" RenderTransformOrigin="0.103,-0.178"/>
+        <TextBox x:Name="txtclaveingresar" HorizontalAlignment="Left" Height="23" Margin="205,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201"/>
         <Label Content="Ingreso de Usuario" HorizontalAlignment="Left" Margin="174,23,0,0" VerticalAlignment="Top" Width="232" FontSize="20"/>
-        <Button Content="Ingresar" HorizontalAlignment="Left" Margin="233,234,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.72,-0.358"/>
+        <Button x:Name="btnIngresarAlSistema" Content="Ingresar" HorizontalAlignment="Left" Margin="233,234,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.72,-0.358"/>
 
     </Grid>
 </Window>
