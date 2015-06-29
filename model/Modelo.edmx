@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bd_inventarioModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="detalle_venta">
+          <Key>
+            <PropertyRef Name="id_venta" />
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_venta" Type="int" Nullable="false" />
+          <Property Name="id_producto" Type="int" Nullable="false" />
+          <Property Name="cantidad_venta" Type="int" Nullable="false" />
+          <Property Name="fecha_venta" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="deudores">
+          <Key>
+            <PropertyRef Name="id_deudor" />
+          </Key>
+          <Property Name="id_deudor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_deudor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefono_deudor" Type="int" Nullable="false" />
+          <Property Name="deuda_deudor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="producto">
+          <Key>
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_producto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="stock_producto" Type="int" Nullable="false" />
+          <Property Name="valor_entrada_producto" Type="int" Nullable="false" />
+          <Property Name="valor_salida_producto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vendedor">
+          <Key>
+            <PropertyRef Name="id_vendedor" />
+          </Key>
+          <Property Name="id_vendedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_vendedor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="clave_vendedor" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="venta">
+          <Key>
+            <PropertyRef Name="id_venta" />
+            <PropertyRef Name="id_deudor" />
+          </Key>
+          <Property Name="id_venta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_venta" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="total_venta" Type="int" Nullable="false" />
+          <Property Name="id_deudor" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'detalle_venta_ibfk_1' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="detalle_venta_ibfk_1" />-->
+        <Association Name="detalle_venta_ibfk_2">
+          <End Role="producto" Type="Self.producto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="detalle_venta" Type="Self.detalle_venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producto">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="detalle_venta">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'venta_ibfk_1' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="venta_ibfk_1" />-->
+        <Association Name="venta_ibfk_2">
+          <End Role="deudores" Type="Self.deudores" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="venta" Type="Self.venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="deudores">
+              <PropertyRef Name="id_deudor" />
+            </Principal>
+            <Dependent Role="venta">
+              <PropertyRef Name="id_deudor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bd_inventarioModelStoreContainer">
+          <EntitySet Name="detalle_venta" EntityType="Self.detalle_venta" Schema="bd_inventario" store:Type="Tables" />
+          <EntitySet Name="deudores" EntityType="Self.deudores" Schema="bd_inventario" store:Type="Tables" />
+          <EntitySet Name="producto" EntityType="Self.producto" Schema="bd_inventario" store:Type="Tables" />
+          <EntitySet Name="vendedor" EntityType="Self.vendedor" Schema="bd_inventario" store:Type="Tables" />
+          <EntitySet Name="venta" EntityType="Self.venta" Schema="bd_inventario" store:Type="Tables" />
+          <AssociationSet Name="detalle_venta_ibfk_2" Association="Self.detalle_venta_ibfk_2">
+            <End Role="producto" EntitySet="producto" />
+            <End Role="detalle_venta" EntitySet="detalle_venta" />
+          </AssociationSet>
+          <AssociationSet Name="venta_ibfk_2" Association="Self.venta_ibfk_2">
+            <End Role="deudores" EntitySet="deudores" />
+            <End Role="venta" EntitySet="venta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bd_inventarioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="detalle_venta">
+          <Key>
+            <PropertyRef Name="id_venta" />
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_venta" Type="Int32" Nullable="false" />
+          <Property Name="id_producto" Type="Int32" Nullable="false" />
+          <Property Name="cantidad_venta" Type="Int32" Nullable="false" />
+          <Property Name="fecha_venta" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="producto" Relationship="Self.detalle_venta_ibfk_2" FromRole="detalle_venta" ToRole="producto" />
+        </EntityType>
+        <EntityType Name="deudore">
+          <Key>
+            <PropertyRef Name="id_deudor" />
+          </Key>
+          <Property Name="id_deudor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_deudor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono_deudor" Type="Int32" Nullable="false" />
+          <Property Name="deuda_deudor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ventas" Relationship="Self.venta_ibfk_2" FromRole="deudores" ToRole="venta" />
+        </EntityType>
+        <EntityType Name="producto">
+          <Key>
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_producto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="stock_producto" Type="Int32" Nullable="false" />
+          <Property Name="valor_entrada_producto" Type="Int32" Nullable="false" />
+          <Property Name="valor_salida_producto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="detalle_venta" Relationship="Self.detalle_venta_ibfk_2" FromRole="producto" ToRole="detalle_venta" />
+        </EntityType>
+        <EntityType Name="vendedor">
+          <Key>
+            <PropertyRef Name="id_vendedor" />
+          </Key>
+          <Property Name="id_vendedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_vendedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="clave_vendedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="venta">
+          <Key>
+            <PropertyRef Name="id_venta" />
+            <PropertyRef Name="id_deudor" />
+          </Key>
+          <Property Name="id_venta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_venta" Type="DateTime" Nullable="false" />
+          <Property Name="total_venta" Type="Int32" Nullable="false" />
+          <Property Name="id_deudor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="deudore" Relationship="Self.venta_ibfk_2" FromRole="venta" ToRole="deudores" />
+        </EntityType>
+        <Association Name="detalle_venta_ibfk_2">
+          <End Role="producto" Type="Self.producto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="detalle_venta" Type="Self.detalle_venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producto">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="detalle_venta">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="venta_ibfk_2">
+          <End Role="deudores" Type="Self.deudore" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="venta" Type="Self.venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="deudores">
+              <PropertyRef Name="id_deudor" />
+            </Principal>
+            <Dependent Role="venta">
+              <PropertyRef Name="id_deudor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bd_inventarioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="detalle_venta" EntityType="Self.detalle_venta" />
+          <EntitySet Name="deudores" EntityType="Self.deudore" />
+          <EntitySet Name="productoes" EntityType="Self.producto" />
+          <EntitySet Name="vendedors" EntityType="Self.vendedor" />
+          <EntitySet Name="ventas" EntityType="Self.venta" />
+          <AssociationSet Name="detalle_venta_ibfk_2" Association="Self.detalle_venta_ibfk_2">
+            <End Role="producto" EntitySet="productoes" />
+            <End Role="detalle_venta" EntitySet="detalle_venta" />
+          </AssociationSet>
+          <AssociationSet Name="venta_ibfk_2" Association="Self.venta_ibfk_2">
+            <End Role="deudores" EntitySet="deudores" />
+            <End Role="venta" EntitySet="ventas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bd_inventarioModelStoreContainer" CdmEntityContainer="bd_inventarioEntities">
+          <EntitySetMapping Name="detalle_venta">
+            <EntityTypeMapping TypeName="bd_inventarioModel.detalle_venta">
+              <MappingFragment StoreEntitySet="detalle_venta">
+                <ScalarProperty Name="id_venta" ColumnName="id_venta" />
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+                <ScalarProperty Name="cantidad_venta" ColumnName="cantidad_venta" />
+                <ScalarProperty Name="fecha_venta" ColumnName="fecha_venta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="deudores">
+            <EntityTypeMapping TypeName="bd_inventarioModel.deudore">
+              <MappingFragment StoreEntitySet="deudores">
+                <ScalarProperty Name="id_deudor" ColumnName="id_deudor" />
+                <ScalarProperty Name="nombre_deudor" ColumnName="nombre_deudor" />
+                <ScalarProperty Name="telefono_deudor" ColumnName="telefono_deudor" />
+                <ScalarProperty Name="deuda_deudor" ColumnName="deuda_deudor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productoes">
+            <EntityTypeMapping TypeName="bd_inventarioModel.producto">
+              <MappingFragment StoreEntitySet="producto">
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+                <ScalarProperty Name="nombre_producto" ColumnName="nombre_producto" />
+                <ScalarProperty Name="stock_producto" ColumnName="stock_producto" />
+                <ScalarProperty Name="valor_entrada_producto" ColumnName="valor_entrada_producto" />
+                <ScalarProperty Name="valor_salida_producto" ColumnName="valor_salida_producto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vendedors">
+            <EntityTypeMapping TypeName="bd_inventarioModel.vendedor">
+              <MappingFragment StoreEntitySet="vendedor">
+                <ScalarProperty Name="id_vendedor" ColumnName="id_vendedor" />
+                <ScalarProperty Name="nombre_vendedor" ColumnName="nombre_vendedor" />
+                <ScalarProperty Name="clave_vendedor" ColumnName="clave_vendedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ventas">
+            <EntityTypeMapping TypeName="bd_inventarioModel.venta">
+              <MappingFragment StoreEntitySet="venta">
+                <ScalarProperty Name="id_venta" ColumnName="id_venta" />
+                <ScalarProperty Name="fecha_venta" ColumnName="fecha_venta" />
+                <ScalarProperty Name="total_venta" ColumnName="total_venta" />
+                <ScalarProperty Name="id_deudor" ColumnName="id_deudor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
